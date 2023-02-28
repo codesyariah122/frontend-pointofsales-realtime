@@ -33,7 +33,7 @@ export default {
 		checkNewData() {
 			window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
 				// check console for production
-				console.log(e)
+				console.log(e[0])
 				this.notifs.push(e[0]);
 			});
 		},
