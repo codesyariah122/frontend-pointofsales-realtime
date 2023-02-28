@@ -283,14 +283,14 @@ export default {
             this.paging.total = null
             setTimeout(() => {
               this.empty = true
-            }, 1000)
+            }, 500)
           }
         })
         .finally(() => {
           setTimeout(() => {
             this.loading = false
             this.loadingDelete = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -338,7 +338,7 @@ export default {
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }
@@ -388,7 +388,7 @@ export default {
             setTimeout(() => {
               setTimeout(() => {
                 this.loadingTrash = false;
-              }, 1000);
+              }, 500);
             });
           })
           .catch((err) => {

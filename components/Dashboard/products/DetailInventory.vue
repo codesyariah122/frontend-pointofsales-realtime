@@ -128,7 +128,7 @@
 					.finally(() => {
 						setTimeout(() => {
 							this.loadingDetail = false
-						}, 1500)
+						}, 500)
 					})
 					.catch(err => {
 						console.log(err)

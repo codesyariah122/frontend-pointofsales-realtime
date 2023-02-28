@@ -197,7 +197,6 @@ export default {
   
   data() {
     return {
-      notifs: [],
       alertToast: '',
       showToast: null,
       messageToast: '',
@@ -240,10 +239,6 @@ export default {
     this.authTokenStorage();
   },
 
-  created() {
-    this.checkNewData();
-  },
-
   mounted() {
     this.checkIsLogin();
     this.fetchAllCategoryTrash(true);
@@ -261,12 +256,6 @@ export default {
 
     handleShowCategory() {
       this.showCategoryTable = !this.showCategoryTable
-    },
-
-    checkNewData() {
-      window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen("EventNotification", (e) => {
-        this.notifs.push(e[0]);
-      });
     },
 
     getBarcode(code, name) {
@@ -292,7 +281,7 @@ export default {
         .finally(() => {
           setTimeout(() => {
             this.loadingBarcodeCategory = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -325,7 +314,7 @@ export default {
         .finally(() => {
           setTimeout(() => {
             this.loadingBarcodeCategory = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -369,13 +358,13 @@ export default {
             this.paging.total = null
             setTimeout(() => {
               this.empty = true
-            }, 1000)
+            }, 500)
           }
         })
         .finally(() => {
           setTimeout(() => {
             this.loadingCategories = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => console.log(err?.response?.data));
 
@@ -422,7 +411,7 @@ export default {
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }
@@ -462,7 +451,7 @@ export default {
             setTimeout(() => {
               setTimeout(() => {
                 this.loadingTrash = false;
-              }, 1000);
+              }, 500);
             });
           })
           .catch((err) => {

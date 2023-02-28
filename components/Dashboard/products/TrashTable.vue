@@ -215,7 +215,7 @@ export default {
               setTimeout(() => {
                 this.loading = false;
                 this.loadingDelete = false;
-              }, 1500);
+              }, 500);
             });
           })
           .catch((err) => {
@@ -252,7 +252,7 @@ export default {
                     icon: "success",
                     title: `Product ${data.data.name}, has been restored!`,
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 1000,
                   });
 
                 }
@@ -260,7 +260,7 @@ export default {
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1000);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }
@@ -300,14 +300,14 @@ export default {
                     icon: "success",
                     title: `Product ${data.data.name}, has been permanently deleted!`,
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 1000,
                   });
                 }
               })
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }

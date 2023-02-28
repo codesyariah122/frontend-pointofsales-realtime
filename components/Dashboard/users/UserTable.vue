@@ -235,6 +235,12 @@
         </tbody>
       </table>
     </div>
+
+    <div class="mt-12 mb-12">
+      <div class="flex justify-end items-end">
+        <dashboard-molecules-globals-pagination :links="links" :paging="paging" @fetch-data="fetchAllUserData"/>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -246,6 +252,14 @@ export default {
       loadingRole: null,
       loading: null,
       users: [],
+      links: [],
+      paging: {
+        current: null,
+        from: null,
+        last: null,
+        per_page: null,
+        total: null
+      },
       api_url: process.env.NUXT_ENV_API_URL,
       showModal: false,
       totalTrash: 0,
@@ -293,7 +307,7 @@ export default {
       this.$store.dispatch("auth/storeAuthToken", "auth");
     },
 
-    fetchAllUserData(loading) {
+    fetchAllUserData(loading, loadingDelete, page=1) {
       try {
         this.loading = loading;
         const config = {
@@ -302,19 +316,25 @@ export default {
             Authorization: `Bearer ${this.token.token}`,
           },
         };
-        const endPoint = `${this.api_url}/fitur/user-management`;
+        const endPoint = `${this.api_url}/fitur/user-management?page=${page}`;
         this.$axios
           .get(endPoint, config)
           .then(({ data }) => {
-            if (data?.data?.length > 0) {
-              this.users = data?.data;
+            if(data.data.data.length > 0) {
+              this.users = data?.data?.data;
+              this.links = data.data.links
+              this.paging.current = data.data.current_page
+              this.paging.from = data.data.from
+              this.paging.last = data.data.last_page
+              this.paging.per_page = data.data.per_page
+              this.paging.total = data.data.total
             }
           })
           .finally(() => {
             setTimeout(() => {
               setTimeout(() => {
                 this.loading = false;
-              }, 1500);
+              }, 500);
             });
           })
           .catch((err) => {
@@ -385,7 +405,7 @@ export default {
                   .finally(() => {
                     setTimeout(() => {
                       this.loadingDelete = false;
-                    }, 1500);
+                    }, 500);
                   })
                   .catch((err) => {
                     console.log(err?.response?.data)
@@ -426,7 +446,7 @@ export default {
           .finally(() => {
             setTimeout(() => {
               this.loadingTrash = false;
-            }, 1000);
+            }, 500);
           })
           .catch((err) => {
             console.log(err.response);
@@ -454,7 +474,7 @@ export default {
           .finally(() => {
             setTimeout(() => {
               this.loadingRole = false;
-            }, 1000);
+            }, 500);
           })
           .catch((err) => {
             console.log(err.response);

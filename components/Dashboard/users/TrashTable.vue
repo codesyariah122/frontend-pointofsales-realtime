@@ -134,7 +134,7 @@
             <td
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right"
             >
-              <dashboard-molecules-users-table-dropdown-trash
+              <dashboard-molecules-globals-table-dropdown-trash
                 @deleteData="
                   deleteUser(
                     user.id,
@@ -232,7 +232,7 @@ export default {
             setTimeout(() => {
               this.loading = false;
               this.loadingDelete = false;
-            }, 1500);
+            }, 500);
           })
           .catch((err) => {
             console.log(err.response);
@@ -276,14 +276,14 @@ export default {
                     icon: "success",
                     title: `Product ${data.data.name}, has been restored!`,
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 1000,
                   });
                 }
               })
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }
@@ -323,14 +323,14 @@ export default {
                     icon: "success",
                     title: `Product ${data.data.name}, has been permanently deleted!`,
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 1000,
                   });
                 }
               })
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }

@@ -343,7 +343,7 @@
     </div>
     <div class="mt-12 mb-12">
       <div class="flex justify-end items-end">
-        <dashboard-molecules-globals-pagination :links="links" :paging="paging" @fetch-product="fetchAllProductData" :category="queryCategory"/>
+        <dashboard-molecules-globals-pagination :links="links" :paging="paging" @fetch-data="fetchAllProductData" :category="queryCategory"/>
       </div>
     </div>
   </div>
@@ -460,7 +460,7 @@ export default {
         .finally(() => {
           setTimeout(() => {
             this.loadingBarcode = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -493,7 +493,7 @@ export default {
         .finally(() => {
           setTimeout(() => {
             this.loadingBarcode = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -544,14 +544,14 @@ export default {
             this.paging.total = null
             setTimeout(() => {
               this.empty = true
-            }, 1000)
+            }, 500)
           }
         })
         .finally(() => {
           setTimeout(() => {
             this.loading = false
             this.loadingDelete = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => {
           console.log(err?.response?.data)
@@ -599,7 +599,7 @@ export default {
               .finally(() => {
                 setTimeout(() => {
                   this.loadingDelete = false;
-                }, 1500);
+                }, 500);
               })
               .catch((err) => console.log(err?.response?.data));
           }
@@ -635,7 +635,7 @@ export default {
         .finally(() => {
           setTimeout(() => {
             this.loadingProductCategories = false
-          }, 1500)
+          }, 500)
         })
         .catch(err => console.log(err?.response?.data));
 
@@ -675,7 +675,7 @@ export default {
       setTimeout(() => {
         this.loadingShow = false
         this.showSearch = true
-      }, 1000)
+      }, 500)
     },
 
     searchByBarcode(e) {
@@ -694,7 +694,7 @@ export default {
       setTimeout(() => {
         this.loadingShow = false
         this.showSearch = true
-      }, 1000)
+      }, 500)
     },
 
     searchByCategory(e) {
@@ -715,7 +715,7 @@ export default {
       setTimeout(() => {
         this.loadingShow = false
         this.showSearch = true
-      }, 1000)
+      }, 500)
     },
 
     fetchAllProductTrash(loading) {
@@ -741,7 +741,7 @@ export default {
             setTimeout(() => {
               setTimeout(() => {
                 this.loadingTrash = false;
-              }, 1000);
+              }, 500);
             });
           })
           .catch((err) => {
