@@ -520,6 +520,7 @@ export default {
   watch: {
     notifs() {
       if (this.notifs.length > 0) {
+        console.log(this.notifs)
         this.fetchAllUserData(false);
         this.fetchAllUserTrash(true)
       }

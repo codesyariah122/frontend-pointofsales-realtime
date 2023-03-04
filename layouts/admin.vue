@@ -22,6 +22,7 @@
   Vue.mixin(globals)
 
   export default {
+    mixins: [globals],
     data() {
       return {
         api_url: process.env.NUXT_ENV_API_URL,
