@@ -141,7 +141,7 @@ export default {
 
   mounted() {
     this.fetchMenus();
-    this.checkIsLogin();
+    this.checkUserLogin();
   },
 
   methods: {
@@ -179,7 +179,7 @@ export default {
       }
     },
 
-    checkIsLogin() {
+    checkUserLogin() {
       if (this.token !== null) {
         this.loadingData = true;
         const endPoint = `${this.api_url}/fitur/user-login`;

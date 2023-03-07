@@ -34,9 +34,9 @@
       this.authTokenStorage();
     },
 
-    mounted() {
-      this.checkIsLogin();
-    },
+    // mounted() {
+    //   this.checkIsLogin();
+    // },
 
     methods: {
       authTokenStorage() {
@@ -86,44 +86,43 @@
         }
       },
 
-
-      checkIsLogin() {
-        if (this.token !== null) {
-          const endPoint = `${this.api_url}/fitur/user-login`;
-          const config = {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${this.token.token}`,
-            },
-          };
-          this.$axios
-          .get(endPoint, config)
-          .then(({ data }) => {
-            if (data.data.logins[0].user_token_login !== this.token.token) {
-              this.$router.replace("/");
-            }
-          })
-          .catch((err) => {
-            if (err?.response?.data) {
-              this.$swal({
-                icon: "error",
-                title: "Oops...",
-                text: "Forbidden Access!",
-              });
-              setTimeout(() => {
-                this.$router.replace("/");
-              }, 1500);
-            }
-          });
-        } else {
-          this.$swal({
-            icon: "error",
-            title: "Oops...",
-            text: "Forbidden Access!",
-          });
-          this.$router.replace("/");
-        }
-      },
+      // checkIsLogin() {
+      //   if (this.token !== null) {
+      //     const endPoint = `${this.api_url}/fitur/user-login`;
+      //     const config = {
+      //       headers: {
+      //         Accept: "application/json",
+      //         Authorization: `Bearer ${this.token.token}`,
+      //       },
+      //     };
+      //     this.$axios
+      //     .get(endPoint, config)
+      //     .then(({ data }) => {
+      //       if (data.data.logins[0].user_token_login !== this.token.token) {
+      //         this.$router.replace("/");
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       if (err?.response?.data) {
+      //         this.$swal({
+      //           icon: "error",
+      //           title: "Oops...",
+      //           text: "Forbidden Access!",
+      //         });
+      //         setTimeout(() => {
+      //           this.$router.replace("/");
+      //         }, 1500);
+      //       }
+      //     });
+      //   } else {
+      //     this.$swal({
+      //       icon: "error",
+      //       title: "Oops...",
+      //       text: "Forbidden Access!",
+      //     });
+      //     this.$router.replace("/");
+      //   }
+      // },
     },
 
     computed: {
