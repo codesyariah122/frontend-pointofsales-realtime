@@ -146,7 +146,13 @@ export default {
               this.$router.replace("/")
             }
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            // console.log(err)
+            if(err.error) {
+              // this.$router.replace("/auth/login")
+              this.sesiLogout(this.roles);
+            }
+          });
       }
     },
 
@@ -162,10 +168,12 @@ export default {
     },
   },
 
-  notifs() {
-    if (this.notifs.length > 0) {
-      this.checkIsLogin()
-    }
+  watch: {
+    notifs() {
+      if (this.notifs.length > 0) {
+        this.checkIsLogin()
+      }
+    },
   },
 
   computed: {

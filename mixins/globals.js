@@ -22,7 +22,7 @@ export default {
 	},
 
 	// mounted() {
-	// 	this.checkNewData();
+	// 	console.log(this.notifs.length);
 	// },
 
 	methods: {
@@ -111,4 +111,14 @@ export default {
 			return this.$store.getters["auth/getAuthToken"];
 		},
 	},
+
+	watch: {
+      notifs() {
+        if (this.notifs.length > 0) {
+          console.log("Event Start")
+        } else {
+        	console.log("Event End")
+        }
+      },
+    }
 }

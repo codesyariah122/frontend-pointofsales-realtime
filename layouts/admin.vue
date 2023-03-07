@@ -22,7 +22,7 @@
   Vue.mixin(globals)
 
   export default {
-    mixins: [globals],
+    // mixins: [globals],
     data() {
       return {
         api_url: process.env.NUXT_ENV_API_URL,
@@ -36,7 +36,6 @@
 
     mounted() {
       this.checkIsLogin();
-      this.checkExpires();
     },
 
     methods: {
@@ -45,22 +44,24 @@
       },
 
       checkExpires() {
-        if (this.token !== null) {
+        if (this?.token !== null) {
           const endPoint = `${this.api_url}/fitur/user-login`;
           const config = {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${this.token.token}`,
+              Authorization: `Bearer ${this?.token?.token}`,
             },
           };
           this.$axios
           .get(endPoint, config)
           .then(({ data }) => {
             const now = this.$moment().format('LLL')
-            this.expires_at = this.$moment(data.data[0].expires_at).format('LLL')
+            const expires_at = this.$moment(data.data[0].expires_at).format('LLL')
             const roles = this.$role(data.data[0].roles[0].roles)
-            if(now>=this.expires_at) {
+            if(now > expires_at) {
               this.sesiLogout(roles)
+            } else {
+              console.log(`Halo ${roles}`)
             }
           })
           .catch((err) => {
@@ -84,6 +85,7 @@
           this.$router.replace("/");
         }
       },
+
 
       checkIsLogin() {
         if (this.token !== null) {
@@ -129,5 +131,13 @@
         return this.$store.getters["auth/getAuthToken"];
       },
     },
+
+    watch: {
+      notifs() {
+        if (this.notifs.length > 0) {
+          this.checkExpires()
+        }
+      },
+    }
   };
 </script>
