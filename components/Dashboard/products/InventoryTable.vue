@@ -351,12 +351,11 @@
 
 
 <script>
-import globals from '@/mixins/globals'
-
 export default {
-  mixins: [globals],
+  
   data() {
     return {
+      notifs: [],
       alertToast: '',
       showToast: null,
       messageToast: '',
@@ -422,6 +421,9 @@ export default {
     this.authTokenStorage();
   },
 
+  created() {
+    this.checkNewData();
+  },
 
   mounted() {
     this.checkIsLogin();
@@ -779,6 +781,13 @@ export default {
         });
         this.$router.replace("/");
       }
+    },
+
+    checkNewData() {
+      window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
+        // check console for production
+        this.notifs.push(e[0]);
+      });
     },
     
   },

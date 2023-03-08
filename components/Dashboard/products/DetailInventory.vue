@@ -77,6 +77,7 @@
 
 		data() {
 			return {
+				notifs: [],
 				loadingDetail: null,
 				barcode: this.$route.params.barcode,
 				detail: {},
@@ -95,7 +96,8 @@
 		},
 
 		created() {
-			this.detailProduct()
+			this.checkNewData();
+			this.detailProduct();
 		},
 
 		methods: {
@@ -164,11 +166,30 @@
 					console.log(err.message)
 				}
 			},
+
+			checkNewData() {
+				window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
+        // check console for production
+					this.notifs.push(e[0]);
+				});
+			},
 		},
 
 		computed: {
 			token() {
 				return this.$store.getters["auth/getAuthToken"];
+			}
+		},
+
+		watch: {
+			notifs() {
+				if (this.notifs.length > 0) {
+					if(this.context.title === 'Category') {
+          				// console.log(this.notifs);
+						this.fetchCategories(false, this.paging.current);
+						this.fetchAllCategoryTrash(true)
+					}
+				}
 			}
 		},
 	}

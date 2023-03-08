@@ -9,7 +9,7 @@ export default {
 			globalLoading: null,
 			expires_at: null,
 			api_url: process.env.NUXT_ENV_API_URL,
-			notifs: []
+			// notifs: []
 		}
 	},
 
@@ -17,9 +17,9 @@ export default {
 		this.authTokenStorage();
 	},
 
-	created() {
-		this.checkNewData();
-	},
+	// created() {
+	// 	this.checkNewData();
+	// },
 
 	// mounted() {
 	// 	console.log(this.notifs.length);
@@ -30,12 +30,12 @@ export default {
 			this.$store.dispatch("auth/storeAuthToken", "auth");
 		},
 
-		checkNewData() {
-			window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
-				// check console for production
-				this.notifs.push(e[0]);
-			});
-		},
+		// checkNewData() {
+		// 	window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
+		// 		// check console for production
+		// 		this.notifs.push(e[0]);
+		// 	});
+		// },
 
 		sesiLogout(roles) {
 			const endPoint = `${this.api_url}/auth/logout`;
@@ -112,13 +112,13 @@ export default {
 		},
 	},
 
-	watch: {
-      notifs() {
-        if (this.notifs.length > 0) {
-          console.log("Event Start")
-        } else {
-        	console.log("Event End")
-        }
-      },
-    }
+	// watch: {
+    //   notifs() {
+    //     if (this.notifs.length > 0) {
+    //       console.log("Event Start")
+    //     } else {
+    //     	console.log("Event End")
+    //     }
+    //   },
+    // }
 }

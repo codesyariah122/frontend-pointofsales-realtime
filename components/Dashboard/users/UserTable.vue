@@ -244,10 +244,7 @@
   </div>
 </template>
 <script>
-import globals from '@/mixins/globals'
-
 export default {
-  mixins: [globals],
   data() {
     return {
       notifs: this.notifs,
@@ -293,6 +290,10 @@ export default {
 
   beforeMount() {
     this.authTokenStorage();
+  },
+
+  created() {
+    this.checkNewData();
   },
 
   mounted() {
@@ -514,6 +515,14 @@ export default {
         this.$router.replace("/");
       }
     },
+
+    checkNewData() {
+      window.Echo.channel(process.env.NUXT_ENV_PUSHER_CHANNEL).listen('EventNotification', (e) => {
+        // check console for production
+        this.notifs.push(e[0]);
+      });
+    },
+
   },
 
   computed: {
