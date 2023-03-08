@@ -64,7 +64,7 @@ export default {
 
 		logout() {
 			this.$swal({
-				title: `Sesi login habis ! kamu akan segera keluar dari Dashboard ${this.roles} ?`,
+				title: `kamu akan segera keluar dari Dashboard ${this.roles} ?`,
 				showDenyButton: false,
 				showCancelButton: true,
 				confirmButtonText: "Keluar",

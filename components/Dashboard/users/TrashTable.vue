@@ -166,9 +166,13 @@
   </div>
 </template>
 <script>
+import globals from '@/mixins/globals'
+
 export default {
+  mixins: [globals],
   data() {
     return {
+      notifs: this.notifs,
       loadingDelete: null,
       loading: null,
       users: [],

@@ -351,8 +351,10 @@
 
 
 <script>
+import globals from '@/mixins/globals'
+
 export default {
-  
+  mixins: [globals],
   data() {
     return {
       alertToast: '',
